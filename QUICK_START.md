@@ -3,7 +3,7 @@
 ## ✅ Configuration Complete!
 
 Your server is now configured with:
-- **Gemini API Key**: `AIzaSyB9jwQNFxk2k12RFAumXibX24hPHJVYqHk`
+- **Gemini API Key**: Set in `.env` file as `GOOGLE_API_KEY`
 - **Model**: `gemini-2.5-flash`
 - **Qdrant**: Connected to Cloud
 - **89 Companies**: Indexed and ready

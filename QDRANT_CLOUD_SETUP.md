@@ -14,7 +14,7 @@ Create a `.env` file in the project root:
 ```env
 # Qdrant Cloud Configuration
 QDRANT_URL=https://273f28aa-76da-48ae-a13e-c55ed05fa841.us-east4-0.gcp.cloud.qdrant.io:6333
-QDRANT_API_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.ZY9xJOuFt7X8hlaSxyonJD4PJo-wQ3qCg-9atesbUD8
+QDRANT_API_KEY=your_qdrant_api_key_here
 ```
 
 **Note**: You can find your API key in the Qdrant Cloud dashboard. If your cluster doesn't require an API key, leave `QDRANT_API_KEY` empty.
