@@ -40,6 +40,10 @@ frontend/node_modules/
 frontend/dist/
 frontend/build/
 frontend/.vite/
+node_modules/
+dist/
+build/
+.vite/
 
 # API Keys and Secrets (extra safety)
 *_key.txt

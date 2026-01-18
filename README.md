@@ -30,6 +30,37 @@ Index in Qdrant (summaries + embeddings)
 Query → Retrieve → Load Full Document → Analyze with Gemini
 ```
 
+## 📁 Project Structure
+
+```
+.
+├── backend/                 # Python backend (structured)
+│   ├── app/                # Main application
+│   │   ├── main.py         # FastAPI entry point
+│   │   ├── config.py       # Configuration
+│   │   ├── models.py       # Pydantic models
+│   │   ├── api/            # API routes
+│   │   ├── services/       # Business logic services
+│   │   └── utils/          # Utility functions
+│   ├── scripts/            # Data processing scripts
+│   └── tests/              # Test files
+├── frontend/               # React frontend
+│   ├── src/
+│   │   ├── components/    # React components
+│   │   └── styles/         # CSS files
+│   └── package.json
+├── docs/                   # Project documentation
+│   ├── reference/          # Reference materials
+│   └── *.md               # Documentation files
+├── data/                   # Raw SEC 10-K files (not in repo)
+├── output/                 # Extracted HTML files (not in repo)
+├── processed_data/         # Markdown files (not in repo)
+├── uploads/                # Uploaded files (not in repo)
+├── requirements.txt         # Python dependencies
+├── .env.example            # Environment variables template
+└── README.md
+```
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -82,6 +113,11 @@ Query → Retrieve → Load Full Document → Analyze with Gemini
    ```bash
    uvicorn backend.app.main:app --reload
    ```
+   
+   Or on Windows:
+   ```bash
+   start_server.bat
+   ```
 
 2. **Start the frontend** (in a new terminal)
    ```bash
@@ -92,47 +128,6 @@ Query → Retrieve → Load Full Document → Analyze with Gemini
 3. **Access the application**
    - Frontend: http://localhost:5173
    - API Docs: http://localhost:8000/docs
-
-## 📁 Project Structure
-
-```
-.
-├── data/                    # Raw SEC 10-K files (not in repo)
-├── output/                  # Extracted HTML files (not in repo)
-├── processed_data/          # Markdown files (not in repo)
-├── uploads/                 # Uploaded files (not in repo)
-├── frontend/                # React frontend
-│   ├── src/
-│   │   ├── components/     # React components
-│   │   └── styles/         # CSS files
-│   └── package.json
-├── backend/                 # Python backend (structured)
-│   ├── app/                # Main application
-│   │   ├── main.py         # FastAPI entry point
-│   │   ├── config.py       # Configuration
-│   │   ├── models.py       # Pydantic models
-│   │   ├── api/            # API routes
-│   │   ├── services/       # Business logic services
-│   │   └── utils/          # Utility functions
-│   ├── scripts/            # Data processing scripts
-│   └── tests/              # Test files
-├── requirements.txt          # Python dependencies
-├── .env.example             # Environment variables template
-└── README.md
-```
-
-## 🔑 Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-# Qdrant Cloud Configuration
-QDRANT_URL=your_qdrant_url_here
-QDRANT_API_KEY=your_qdrant_api_key_here
-
-# Google Gemini API
-GOOGLE_API_KEY=your_gemini_api_key_here
-```
 
 ## 📊 Data Processing
 
@@ -163,11 +158,18 @@ python -m backend.scripts.index_uploaded_files
 - **Command Palette**: Press `Ctrl+K` for quick actions
 - **Export**: Download analysis as Markdown
 
-## 🔒 Security
+## 🔑 Environment Variables
 
-- **No API keys in code**: All keys must be set via environment variables
-- **`.env` file ignored**: Never commit your `.env` file
-- **Secure defaults**: Application fails safely if keys are missing
+Create a `.env` file in the root directory:
+
+```env
+# Qdrant Cloud Configuration
+QDRANT_URL=your_qdrant_url_here
+QDRANT_API_KEY=your_qdrant_api_key_here
+
+# Google Gemini API
+GOOGLE_API_KEY=your_gemini_api_key_here
+```
 
 ## 📝 API Endpoints
 
@@ -190,10 +192,11 @@ python -m backend.scripts.index_uploaded_files
 
 ## 📚 Documentation
 
-- `SYSTEM_ARCHITECTURE.md` - Complete system architecture
-- `HONEST_ANALYSIS_AND_IMPROVEMENTS.md` - System analysis and improvements
-- `UPLOADED_FILES_RAG_PIPELINE.md` - Upload feature documentation
-- `TEST_QUERIES.md` - Test queries for verification
+See the [docs/](./docs/) directory for comprehensive documentation:
+- Setup guides
+- Architecture documentation
+- Feature documentation
+- Testing guides
 
 ## 🤝 Contributing
 
