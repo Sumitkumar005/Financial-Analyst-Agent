@@ -34,8 +34,16 @@ if not QDRANT_URL or not QDRANT_API_KEY:
 COLLECTION_NAME = "financial_sections"  # New collection for chunks
 EMBEDDING_DIM = 384
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
-PROCESSED_DATA_DIR = Path("processed_data")
-METADATA_FILE = "conversion_metadata.json"
+# Paths relative to project root
+import sys
+from pathlib import Path
+
+# Add project root to path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+PROCESSED_DATA_DIR = project_root / "processed_data"
+METADATA_FILE = project_root / "conversion_metadata.json"
 
 # Standard 10-K section patterns
 SECTION_PATTERNS = [

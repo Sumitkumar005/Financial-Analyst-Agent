@@ -7,5 +7,5 @@ echo - Model: gemini-2.5-flash
 echo - Qdrant: Connected to Cloud
 echo.
 call venv\Scripts\activate.bat
-python server.py
+python -m backend.app.main
 pause

@@ -75,7 +75,12 @@ Query → Retrieve → Load Full Document → Analyze with Gemini
 
 1. **Start the backend server**
    ```bash
-   python server.py
+   python -m backend.app.main
+   ```
+   
+   Or using uvicorn:
+   ```bash
+   uvicorn backend.app.main:app --reload
    ```
 
 2. **Start the frontend** (in a new terminal)
@@ -101,9 +106,16 @@ Query → Retrieve → Load Full Document → Analyze with Gemini
 │   │   ├── components/     # React components
 │   │   └── styles/         # CSS files
 │   └── package.json
-├── server.py                # FastAPI backend
-├── index.py                  # Vector indexing script
-├── chunk_markdown_files.py   # Section chunking script
+├── backend/                 # Python backend (structured)
+│   ├── app/                # Main application
+│   │   ├── main.py         # FastAPI entry point
+│   │   ├── config.py       # Configuration
+│   │   ├── models.py       # Pydantic models
+│   │   ├── api/            # API routes
+│   │   ├── services/       # Business logic services
+│   │   └── utils/          # Utility functions
+│   ├── scripts/            # Data processing scripts
+│   └── tests/              # Test files
 ├── requirements.txt          # Python dependencies
 ├── .env.example             # Environment variables template
 └── README.md
@@ -127,19 +139,19 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 ### Index Existing Files
 
 ```bash
-python index.py
+python -m backend.scripts.index
 ```
 
 ### Chunk Files for Smart Retrieval
 
 ```bash
-python chunk_markdown_files.py
+python -m backend.scripts.chunk_markdown_files
 ```
 
 ### Index Uploaded Files
 
 ```bash
-python index_uploaded_files.py
+python -m backend.scripts.index_uploaded_files
 ```
 
 ## 🎨 Frontend Features

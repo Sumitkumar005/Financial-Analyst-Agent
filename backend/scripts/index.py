@@ -34,8 +34,16 @@ if not QDRANT_URL or not QDRANT_API_KEY:
 COLLECTION_NAME = "financial_reports"
 EMBEDDING_DIM = 384  # all-MiniLM-L6-v2 dimension
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"  # Fast, free, good quality
-METADATA_FILE = "conversion_metadata.json"
-PROCESSED_DATA_DIR = Path("processed_data")
+# Paths relative to project root
+import sys
+from pathlib import Path
+
+# Add project root to path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+METADATA_FILE = project_root / "conversion_metadata.json"
+PROCESSED_DATA_DIR = project_root / "processed_data"
 
 
 def get_embedding_model():

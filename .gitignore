@@ -76,3 +76,7 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+# Backend structure
+backend/__pycache__/
+backend/**/__pycache__/
