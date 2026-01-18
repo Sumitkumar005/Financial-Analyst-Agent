@@ -1,0 +1,411 @@
+/* Clean, Minimal Design - YC/Startup Style */
+
+:root {
+  /* Light, Clean Colors */
+  --clean-bg: #ffffff;
+  --clean-bg-secondary: #fafafa;
+  --clean-bg-tertiary: #f5f5f5;
+  
+  --clean-text-primary: #0a0a0a;
+  --clean-text-secondary: #6b7280;
+  --clean-text-tertiary: #9ca3af;
+  
+  --clean-border: #e5e7eb;
+  --clean-border-hover: #d1d5db;
+  
+  --clean-accent: #0066ff;
+  --clean-accent-hover: #0052cc;
+  --clean-accent-light: #eff6ff;
+  
+  --clean-success: #10b981;
+  --clean-warning: #f59e0b;
+  --clean-error: #ef4444;
+  
+  /* Shadows - Subtle */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'SF Pro Display', system-ui, sans-serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+}
+
+/* Clean App */
+.clean-app {
+  min-height: 100vh;
+  background: var(--clean-bg);
+  color: var(--clean-text-primary);
+  font-family: var(--font-sans);
+}
+
+/* Clean Header */
+.clean-header {
+  background: var(--clean-bg);
+  border-bottom: 1px solid var(--clean-border);
+  padding: 16px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.clean-header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clean-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--clean-text-primary);
+  text-decoration: none;
+}
+
+.clean-logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--clean-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.clean-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.clean-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--clean-bg-secondary);
+  border: 1px solid var(--clean-border);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--clean-text-secondary);
+  font-weight: 500;
+}
+
+/* Clean Button */
+.clean-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--clean-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clean-button:hover {
+  background: var(--clean-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.clean-button:active {
+  transform: translateY(0);
+}
+
+.clean-button-secondary {
+  background: var(--clean-bg);
+  color: var(--clean-text-primary);
+  border: 1px solid var(--clean-border);
+}
+
+.clean-button-secondary:hover {
+  background: var(--clean-bg-secondary);
+  border-color: var(--clean-border-hover);
+}
+
+/* Clean Input */
+.clean-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--clean-bg);
+  border: 1px solid var(--clean-border);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--clean-text-primary);
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.clean-input:focus {
+  outline: none;
+  border-color: var(--clean-accent);
+  box-shadow: 0 0 0 3px var(--clean-accent-light);
+}
+
+.clean-input::placeholder {
+  color: var(--clean-text-tertiary);
+}
+
+/* Clean Textarea */
+.clean-textarea {
+  width: 100%;
+  padding: 16px;
+  background: var(--clean-bg);
+  border: 1px solid var(--clean-border);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--clean-text-primary);
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 120px;
+  transition: all 0.2s ease;
+}
+
+.clean-textarea:focus {
+  outline: none;
+  border-color: var(--clean-accent);
+  box-shadow: 0 0 0 3px var(--clean-accent-light);
+}
+
+/* Clean Card */
+.clean-card {
+  background: var(--clean-bg);
+  border: 1px solid var(--clean-border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+
+.clean-card:hover {
+  border-color: var(--clean-border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* Clean Tab */
+.clean-tab {
+  display: flex;
+  gap: 8px;
+  background: var(--clean-bg-secondary);
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.clean-tab-button {
+  flex: 1;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--clean-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.clean-tab-button.active {
+  background: var(--clean-bg);
+  color: var(--clean-text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Clean Table */
+.clean-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+}
+
+.clean-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--clean-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--clean-border);
+}
+
+.clean-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--clean-border);
+  color: var(--clean-text-primary);
+}
+
+.clean-table tbody tr:hover {
+  background: var(--clean-bg-secondary);
+}
+
+.clean-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Clean Badge */
+.clean-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  background: var(--clean-bg-secondary);
+  border: 1px solid var(--clean-border);
+  border-radius: 6px;
+  font-size: 12px;
+  color: var(--clean-text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clean-chip:hover {
+  background: var(--clean-bg-tertiary);
+  border-color: var(--clean-border-hover);
+}
+
+/* Clean Loading */
+.clean-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px;
+  text-align: center;
+}
+
+.clean-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--clean-border);
+  border-top-color: var(--clean-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Clean Container */
+.clean-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Clean Section */
+.clean-section {
+  margin-bottom: 32px;
+}
+
+.clean-section-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--clean-text-primary);
+}
+
+.clean-section-description {
+  font-size: 15px;
+  color: var(--clean-text-secondary);
+  margin-bottom: 24px;
+}
+
+/* Command Palette - Clean Style */
+.clean-command-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10vh;
+}
+
+.clean-command-palette {
+  width: 90%;
+  max-width: 600px;
+  background: var(--clean-bg);
+  border: 1px solid var(--clean-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.clean-command-input {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-bottom: 1px solid var(--clean-border);
+  font-size: 15px;
+  background: transparent;
+}
+
+.clean-command-input:focus {
+  outline: none;
+}
+
+.clean-command-item {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.clean-command-item:hover,
+.clean-command-item.selected {
+  background: var(--clean-bg-secondary);
+}
+
+/* Scrollbar */
+.clean-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.clean-scrollbar::-webkit-scrollbar-track {
+  background: var(--clean-bg-secondary);
+}
+
+.clean-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--clean-border);
+  border-radius: 4px;
+}
+
+.clean-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--clean-border-hover);
+}
