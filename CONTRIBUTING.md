@@ -9,7 +9,7 @@ Thank you for your interest in contributing to Financial Analyst Agent!
    ```bash
    python -m venv venv
    source venv/bin/activate  # Windows: venv\Scripts\activate
-   pip install -r requirements.txt
+   pip install -r backend/requirements.txt
    ```
 
 3. **Set up frontend**

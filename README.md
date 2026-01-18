@@ -56,7 +56,9 @@ Query → Retrieve → Load Full Document → Analyze with Gemini
 ├── output/                 # Extracted HTML files (not in repo)
 ├── processed_data/         # Markdown files (not in repo)
 ├── uploads/                # Uploaded files (not in repo)
-├── requirements.txt         # Python dependencies
+├── backend/
+│   ├── requirements.txt     # Python dependencies
+│   └── ...
 ├── .env.example            # Environment variables template
 └── README.md
 ```
@@ -86,7 +88,7 @@ Query → Retrieve → Load Full Document → Analyze with Gemini
 
 3. **Install Python dependencies**
    ```bash
-   pip install -r requirements.txt
+   pip install -r backend/requirements.txt
    ```
 
 4. **Set up environment variables**

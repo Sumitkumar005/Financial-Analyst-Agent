@@ -69,6 +69,14 @@ python -m backend.scripts.chunk_markdown_files
 python -m backend.scripts.create_ticker_index
 ```
 
+## Installation
+
+Install dependencies from the project root:
+
+```bash
+pip install -r backend/requirements.txt
+```
+
 ## Configuration
 
-All configuration is in `app/config.py` and uses environment variables from `.env` file.
+All configuration is in `app/config.py` and uses environment variables from `.env` file in the project root.
