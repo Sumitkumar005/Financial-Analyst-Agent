@@ -55,6 +55,16 @@ frontend/.vite/
 test_*.py
 *_test.py
 
+# Generated metadata files
+conversion_metadata.json
+conversion_metadata.csv
+
+# One-time fix/exploration scripts (keep in gitignore for future)
+fix_*.py
+explore_*.py
+analyze_*.py
+generate_*.py
+
 # Jupyter
 .ipynb_checkpoints/
 
