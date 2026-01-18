@@ -1,0 +1,78 @@
+═══════════════════════════════════════════════════════════════════
+  COPY-PASTE TEST QUERIES FOR INTEREST RATE RISK TABLE
+═══════════════════════════════════════════════════════════════════
+
+📋 TEST 1: Simple Extraction
+───────────────────────────────────────────────────────────────────
+What is the total value of cash equivalents and marketable debt securities as of December 31, 2024?
+
+Expected: $84,667 million
+
+
+📋 TEST 2: Table Reconstruction  
+───────────────────────────────────────────────────────────────────
+Show me the interest rate risk table with all security types, their total values, and weighted average interest rates.
+
+Expected: Complete table with all 6 security types and totals
+
+
+📋 TEST 3: Comparison & Reasoning
+───────────────────────────────────────────────────────────────────
+Which security type has the highest total value in the interest rate risk table, and what is its weighted average interest rate?
+
+Expected: Corporate debt securities, $51,139M, 4.60%
+
+
+📋 TEST 4: Specific Cell Extraction
+───────────────────────────────────────────────────────────────────
+What is the weighted average interest rate for money market funds?
+
+Expected: 4.42%
+
+
+📋 TEST 5: Time-Based Analysis
+───────────────────────────────────────────────────────────────────
+How much corporate debt securities mature in 2025, and what is the weighted average interest rate?
+
+Expected: $47,908 million at 4.65%
+
+
+📋 TEST 6: Percentage Calculation
+───────────────────────────────────────────────────────────────────
+What percentage of total cash equivalents and marketable debt securities mature in 2025?
+
+Expected: ~93.1% ($78,821M / $84,667M)
+
+
+📋 TEST 7: Multi-Column Table
+───────────────────────────────────────────────────────────────────
+Break down the interest rate risk table showing money market funds and corporate debt securities across all maturity years (2025-2029 and thereafter).
+
+Expected: Table with both security types across all years
+
+
+📋 TEST 8: Cross-Category Comparison
+───────────────────────────────────────────────────────────────────
+Compare the interest rates of U.S. government securities versus corporate debt securities in the interest rate risk table.
+
+Expected: U.S. gov: 3.51%, Corporate: 4.60%
+
+
+═══════════════════════════════════════════════════════════════════
+  HOW TO VERIFY RESULTS
+═══════════════════════════════════════════════════════════════════
+
+✅ Check:
+- Numbers match screenshot exactly
+- Tables render properly in frontend
+- No hallucinations (made-up numbers)
+- Source attribution present
+- Calculations are correct
+
+❌ Red Flags:
+- Wrong numbers
+- Missing data
+- Broken table formatting
+- No source citation
+
+═══════════════════════════════════════════════════════════════════

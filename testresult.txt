@@ -1,0 +1,130 @@
+AMAZON.COM, INC.
+CONSOLIDATED STATEMENTS OF OPERATIONS
+(in millions, except per share data)
+  
+Year Ended December 31,
+ 	2022		2023		2024
+Net product sales	$	242,901 			$	255,887 			$	272,311 	
+Net service sales	271,082 			318,898 			365,648 	
+Total net sales	513,983 			574,785 			637,959 	
+Operating expenses:					
+Cost of sales	288,831 			304,739 			326,288 	
+Fulfillment	84,299 			90,619 			98,505 	
+Technology and infrastructure	73,213 			85,622 			88,544 	
+Sales and marketing	42,238 			44,370 			43,907 	
+General and administrative	11,891 			11,816 			11,359 	
+Other operating expense (income), net	1,263 			767 			763 	
+Total operating expenses	501,735 			537,933 			569,366 	
+Operating income	12,248 			36,852 			68,593 	
+Interest income	989 			2,949 			4,677 	
+Interest expense	(2,367)			(3,182)			(2,406)	
+Other income (expense), net	(16,806)			938 			(2,250)	
+Total non-operating income (expense)	(18,184)			705 			21 	
+Income (loss) before income taxes	(5,936)			37,557 			68,614 	
+Benefit (provision) for income taxes	3,217 			(7,120)			(9,265)	
+Equity-method investment activity, net of tax	(3)			(12)			(101)	
+Net income (loss)	$	(2,722)			$	30,425 			$	59,248 	
+Basic earnings per share	$	(0.27)			$	2.95 			$	5.66 	
+Diluted earnings per share	$	(0.27)			$	2.90 			$	5.53 	
+Weighted-average shares used in computation of earnings per share:					
+Basic	10,189 			10,304 			10,473 	
+Diluted	10,189 			10,492 			10,721 	
+ 
+See accompanying notes to consolidated financial statements.
+37
+Table of Contents
+
+AMAZON.COM, INC.
+CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME (LOSS)
+(in millions)
+  
+Year Ended December 31,
+ 	2022		2023		2024
+Net income (loss)	$	(2,722)			$	30,425 			$	59,248 	
+Other comprehensive income (loss):					
+Foreign currency translation adjustments, net of tax of $100, $(55), and $226
+(2,586)			1,027 			(3,333)	
+Available-for-sale debt securities:					
+Change in net unrealized gains (losses), net of tax of $159, $(110), and $(2,086)
+(823)			366 			6,339 	
+Less: reclassification adjustment for losses (gains) included in “Other income (expense), net,” net of tax of $0, $(15), and $(2)
+298 			50 			5 	
+Net change	(525)			416 			6,344 	
+Other, net of tax of $0, $(1), and $1
+— 			4 			(5)	
+Total other comprehensive income (loss)	(3,111)			1,447 			3,006 	
+Comprehensive income (loss)	$	(5,833)			$	31,872 			$	62,254 	
+ 
+See accompanying notes to consolidated financial statements.
+
+
+this is txt in html or markdown 
+
+
+
+Result
+Here is a comparison of Amazon's Consolidated Statements of Operations and Consolidated Statements of Comprehensive Income (Loss) for the year ended December 31, 2022, presented in a markdown table:
+
+Comparison of Consolidated Statements of Operations and Comprehensive Income (Loss) for 2022 (in millions, except per share data)
+
+Item	Consolidated Statements of Operations (2022)	Consolidated Statements of Comprehensive Income (Loss) (2022)
+Net income (loss)	$ (2,722)	$ (2,722)
+Other comprehensive income (loss):		
+Foreign currency translation adjustments, net of tax of $100	N/A	(2,586)
+Available-for-sale debt securities:		
+Change in net unrealized gains (losses), net of tax of $159	N/A	(823)
+Less: reclassification adjustment for losses (gains) included in "Other income (expense), net," net of tax of $0	N/A	298
+Net change (Available-for-sale debt securities)	N/A	(525)
+Other, net of tax of $0	N/A	—
+Total other comprehensive income (loss)	N/A	(3,111)
+Comprehensive income (loss)	N/A	$ (5,833)
+Note on "N/A": Items marked "N/A" are not reported in that specific financial statement and are included in the table for a comprehensive comparison between the two statements.
+
+Analysis for the year ended December 31, 2022:
+
+The Consolidated Statements of Operations reports the revenues and expenses over a period, culminating in net income or loss. For 2022, Amazon reported a Net income (loss) of $ (2,722) million. This indicates a net loss for the year.
+
+The Consolidated Statements of Comprehensive Income (Loss) starts with the net income or loss from the Statement of Operations and then includes "Other Comprehensive Income (Loss)" (OCI) items. These OCI items represent revenues, expenses, gains, and losses that are not included in net income but are part of comprehensive income.
+
+For 2022, Amazon's Other Comprehensive Income (Loss) included:
+
+Foreign currency translation adjustments, net of tax of $100 million: A loss of $ (2,586) million.
+Available-for-sale debt securities:
+A change in net unrealized gains (losses) of $ (823) million (net of tax of $159 million).
+A reclassification adjustment for losses (gains) of $ 298 million (net of tax of $0).
+Resulting in a net change of $ (525) million for available-for-sale debt securities.
+Other, net of tax of $0 million: No impact ($ — million).
+The Total other comprehensive income (loss) for 2022 was $ (3,111) million.
+
+Combining the Net income (loss) of $ (2,722) million with the Total other comprehensive income (loss) of $ (3,111) million results in a Comprehensive income (loss) of $ (5,833) million for the year ended December 31, 2022.
+
+In summary, for 2022, Amazon experienced both a net loss and significant other comprehensive losses, primarily due to foreign currency translation adjustments and changes in available-for-sale debt securities, leading to a substantial comprehensive loss.
+
+Sources
+
+
+
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:50422 - "OPTIONS /analyze HTTP/1.1" 200 OK
+[INFO] Analyzing query: 'Compare Amazon.
+CONSOLIDATED STATEMENTS OF OPERATIONS
+(in millions, except per share data) VS
+CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME (LOSS)
+(in millions) for year 2022 and show me table'
+[INFO] Companies found: ['OF', 'AMZN', 'VS', 'LOSS']
+[WARNING] Ticker OF not found in Qdrant
+[INFO] Using original file for AMZN
+[INFO] Loaded file for AMZN: processed_data\AMZN_2024.md
+[WARNING] Ticker VS not found in Qdrant
+[WARNING] Ticker LOSS not found in Qdrant
+[SUCCESS] Gemini model 'gemini-2.5-flash' loaded!
+[INFO] API Key configured: AIzaSyB9jwQNFxk2k12R...YqHk
+[INFO] Loading embedding model: all-MiniLM-L6-v2...
+[SUCCESS] Model loaded!
+[WARNING] Sections collection 'financial_sections' not found. Using full file.
+[INFO] Run 'python chunk_markdown_files.py' to create the sections collection.
+[INFO] Smart retrieval unavailable for AMZN, using full file
+[INFO] Sending to Gemini: 90804 tokens
+[SUCCESS] Gemini analysis complete!
+INFO:     127.0.0.1:50422 - "POST /analyze HTTP/1.1" 200 OK

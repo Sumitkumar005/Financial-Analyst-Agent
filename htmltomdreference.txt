@@ -1,0 +1,35 @@
+# Install the "Vision" tool for HTML (Markdownify)
+!pip install -q markdownify
+
+import markdownify
+import json
+
+# 1. Load your clean HTML
+input_path = "/content/clean_filings/AMZN_2024_10K.html"
+
+with open(input_path, "r", encoding="utf-8") as f:
+    html_content = f.read()
+
+# 2. The "Vision" Step: Convert HTML Structure to Markdown
+# This keeps tables as | Column 1 | Column 2 | instead of mushy text
+markdown_text = markdownify.markdownify(html_content, heading_style="ATX")
+
+# 3. Simulate the "Agent" finding the "Segment Information"
+# In a real app, the LLM does this. Here, we prove the data is clean.
+print("🤖 Agent Analysis: Searching for AWS Segment Data...")
+
+if "AWS" in markdown_text and "North America" in markdown_text:
+    print("✅ FOUND: Segment Breakdown Table detected!")
+    
+    # Let's print the first 500 characters of the markdown to show the clean structure
+    print("\n--- EXTRACTED MARKDOWN (What the AI sees) ---")
+    print(markdown_text[:1000]) 
+    print("---------------------------------------------")
+    
+    # Save this as the final "Source of Truth" for your RAG
+    with open("/content/clean_filings/AMZN_2024_Insights.md", "w") as f:
+        f.write(markdown_text)
+    print("🚀 Ready for RAG: Saved as AMZN_2024_Insights.md")
+
+else:
+    print("⚠️ Warning: Could not find Segment Data. We might need to parse a different sub-document.")

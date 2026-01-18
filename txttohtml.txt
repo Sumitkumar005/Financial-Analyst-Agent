@@ -1,0 +1,60 @@
+import re
+import os
+
+# 1. Update this path to match your file (AMZN/10-K/...)
+file_path = "/content/sec-edgar-filings/AMZN/10-K/0001018724-25-000004/full-submission.txt"
+output_dir = "/content/clean_filings"
+os.makedirs(output_dir, exist_ok=True)
+
+print(f"🧹 Parsing {file_path}...")
+
+def extract_largest_html(path):
+    with open(path, "r", encoding="utf-8", errors="replace") as f:
+        content = f.read()
+
+    # Regex to find ALL documents
+    doc_start_pattern = re.compile(r'<DOCUMENT>')
+    doc_end_pattern = re.compile(r'</DOCUMENT>')
+
+    starts = [m.start() for m in doc_start_pattern.finditer(content)]
+    ends = [m.end() for m in doc_end_pattern.finditer(content)]
+
+    largest_html = ""
+    max_size = 0
+
+    print(f"   Found {len(starts)} sub-documents. Searching for the Main 10-K...")
+
+    for start, end in zip(starts, ends):
+        doc_content = content[start:end]
+
+        # We only want HTML documents (not images/graphics)
+        if '<HTML>' in doc_content or '<html>' in doc_content:
+            # Clean up the headers to get pure HTML
+            html_start = doc_content.find('<HTML>')
+            if html_start == -1: html_start = doc_content.find('<html>')
+
+            html_end = doc_content.find('</HTML>')
+            if html_end == -1: html_end = doc_content.find('</html>')
+
+            if html_start != -1 and html_end != -1:
+                # Add 7 to include the closing tag </HTML>
+                clean_doc = doc_content[html_start:html_end+7]
+
+                # Logic: The 10-K is usually the largest text component
+                if len(clean_doc) > max_size:
+                    max_size = len(clean_doc)
+                    largest_html = clean_doc
+
+    return largest_html
+
+# Execute
+clean_html = extract_largest_html(file_path)
+
+if clean_html:
+    save_path = f"{output_dir}/AMZN_2024_10K.html"
+    with open(save_path, "w", encoding="utf-8") as f:
+        f.write(clean_html)
+    print(f"✅ Success! Main 10-K extracted ({len(clean_html)} chars).")
+    print(f"Saved to: {save_path}")
+else:
+    print("❌ Critical Error: No HTML found in this file.")

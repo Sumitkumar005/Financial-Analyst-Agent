@@ -1,0 +1,26 @@
+# Core dependencies for Table-Aware RAG Pipeline
+
+# Vector Database
+qdrant-client>=1.7.0
+
+# API Framework
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.0.0
+
+# LLM & Embeddings
+openai>=1.3.0
+sentence-transformers>=2.2.0
+google-generativeai>=0.3.0
+langchain>=0.1.0
+langchain-google-genai>=0.0.6
+langchain-community>=0.0.10
+
+# Data Processing
+markdownify>=0.11.6
+pandas>=2.0.0
+tqdm>=4.66.0
+
+# Utilities
+python-dotenv>=1.0.0
+python-multipart>=0.0.6

@@ -1,0 +1,71 @@
+Request body
+
+application/json
+Edit Value
+Schema
+{
+  "query": "tell me about Information About few Executive Officers at AMAZON.COM, INC",
+  "max_companies": 2
+}
+Execute
+Clear
+Responses
+Curl
+
+curl -X 'POST' \
+  'http://localhost:8000/analyze' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "query": "tell me about Information About few Executive Officers at AMAZON.COM, INC",
+  "max_companies": 2
+}'
+Request URL
+http://localhost:8000/analyze
+Server response
+Code	Details
+200	
+Response body
+Download
+{
+  "query": "tell me about Information About few Executive Officers at AMAZON.COM, INC",
+  "companies_found": [
+    "AMZN"
+  ],
+  "file_paths": [
+    "processed_data\\AMZN_2024.md"
+  ],
+  "analysis": "Here is an analysis of information about a few Executive Officers at AMAZON.COM, INC., based on the provided financial document (AMZN 2024 Form 10-K).\n\n***\n\n### Analysis of Executive Officers at AMAZON.COM, INC.\n\nThe information regarding Executive Officers is found under **Part I, Item 1, \"Business — Executive Officers and Directors\"** of the AMZN 2024 Form 10-K, effective as of January 29, 2025.\n\n**1. Jeffrey P. Bezos**\n*   **Age:** 61\n*   **Position:** Executive Chair\n*   **Details:** Mr. Bezos founded Amazon.com in 1994. He has served as Executive Chair since July 2021 and as Chair of the Board since 1994. He previously served as Chief Executive Officer from May 1996 until July 2021, and as President from 1994 until June 1999 and again from October 2000 to July 2021.\n\n**2. Andrew R. Jassy**\n*   **Age:** 57\n*   **Position:** President and Chief Executive Officer\n*   **Details:** Mr. Jassy has served as President and Chief Executive Officer since July 2021. Prior to this, he was CEO of Amazon Web Services from April 2016 until July 2021, and Senior Vice President, Amazon Web Services, from April 2006 until April 2016.\n\n**3. Matthew S. Garman**\n*   **Age:** 48\n*   **Position:** CEO Amazon Web Services\n*   **Details:** Mr. Garman has served as CEO Amazon Web Services since June 2024. Before this role, he was Senior Vice President, Amazon Web Services from February 2021 until June 2024. His previous roles include Vice President, Marketing, Sales and Support of Amazon Web Services from January 2020 to February 2021, Vice President, AWS Compute Services from September 2018 to January 2020, and Vice President, EC2 from December 2012 to September 2018.\n\n**4. Douglas J. Herrington**\n*   **Age:** 58\n*   **Position:** CEO Worldwide Amazon Stores\n*   **Details:** Mr. Herrington has served as CEO Worldwide Amazon Stores since July 2022. He previously held the positions of Senior Vice President, North America Consumer from January 2015 to July 2022, Senior Vice President, Consumables from May 2014 to December 2014, and Vice President, Consumables from May 2005 to April 2014. Additionally, on November 7, 2024, Douglas Herrington adopted a trading plan to sell up to 158,970 shares of Amazon.com, Inc. common stock over a period ending on December 31, 2025 (cited in Part II, Item 9B, \"Other Information\").\n\n**5. Brian T. Olsavsky**\n*   **Age:** 61\n*   **Position:** Senior Vice President and Chief Financial Officer\n*   **Details:** Mr. Olsavsky has served as Senior Vice President and Chief Financial Officer since June 2015. His earlier roles include Vice President, Finance for the Global Consumer Business from December 2011 to June 2015, and numerous other financial leadership roles with global responsibility since April 2002. On November 11, 2024, Brian Olsavsky adopted a trading plan to sell up to 32,370 shares of Amazon.com, Inc. common stock over a period ending on May 30, 2025 (cited in Part II, Item 9B, \"Other Information\").\n\n**6. Shelley L. Reynolds**\n*   **Age:** 60\n*   **Position:** Vice President, Worldwide Controller, and Principal Accounting Officer\n*   **Details:** Ms. Reynolds has served as Vice President, Worldwide Controller, and Principal Accounting Officer since April 2007. On November 7, 2024, Shelley Reynolds adopted a trading plan to sell up to 16,938 shares of Amazon.com, Inc. common stock over a period ending on November 29, 2025 (cited in Part II, Item 9B, \"Other Information\").\n\n**7. David A. Zapolsky**\n*   **Age:** 61\n*   **Position:** Senior Vice President, Global Public Policy and General Counsel\n*   **Details:** Mr. Zapolsky has served as Senior Vice President, Global Public Policy and General Counsel since May 2023. He served as Secretary from September 2012 to January 2024, Senior Vice President and General Counsel from May 2014 to May 2023, Vice President and General Counsel from September 2012 to May 2014, and as Vice President and Associate General Counsel for Litigation and Regulatory matters from April 2002 until September 2012. On November 12, 2024, David Zapolsky adopted a trading plan to sell up to 87,070 shares of Amazon.com, Inc. common stock over a period ending on December 31, 2025 (cited in Part II, Item 9B, \"Other Information\").\n\n***",
+  "metadata": {
+    "total_files": 1,
+    "total_content_size": 363196,
+    "companies": [
+      {
+        "ticker": "AMZN",
+        "file_path": "processed_data\\AMZN_2024.md",
+        "content_length": 363196,
+        "metadata": {
+          "ticker": "AMZN",
+          "year": "2024",
+          "file_path": "processed_data\\AMZN_2024.md",
+          "summary": "xml version='1.0' encoding='ASCII'?\n\n\n\n\namzn-20241231\n\nfalse2024FY0001018724P3YP1YP1Yhttp://fasb.org/us-gaap/2024#PropertyPlantAndEquipmentAndFinanceLeaseRightOfUseAssetAfterAccumulatedDepreciationAndAmortizationhttp://fasb.org/us-gaap/2024#PropertyPlantAndEquipmentAndFinanceLeaseRightOfUseAssetAfterAccumulatedDepreciationAndAmortizationhttp://fasb.org/us-gaap/2024#AccruedLiabilitiesCurrenthttp://fasb.org/us-gaap/2024#AccruedLiabilitiesCurrenthttp://fasb.org/us-gaap/2024#AccruedLiabilitiesCurrenthttp://fasb.org/us-gaap/2024#AccruedLiabilitiesCurrenthttp://www.amazon.com/20241231#LeaseLiabilityNoncurrenthttp://www.amazon.com/20241231#LeaseLiabilityNoncurrenthttp://www.amazon.com/20241231#LeaseLiabilityNoncurrenthttp://www.amazon.com/20241231#LeaseLiabilityNoncurrenthttp://fasb.org/us-gaap/2024#AccruedLiabilitiesCurrenthttp://fasb.org/us-gaap/2024#AccruedLiabilitiesCurrenthttp://fasb.org/us-gaap/2024#AccruedLiabilitiesCurrenthttp://fasb.org/us-gaap/2024#AccruedLiabilitiesCurrenthttp://ww",
+          "tables_count": 6081,
+          "size_mb": 0.35,
+          "lines": 3145
+        }
+      }
+    ]
+  }
+}
+Response headers
+ access-control-allow-credentials: true 
+ access-control-allow-origin: * 
+ content-length: 5775 
+ content-type: application/json 
+ date: Sat,17 Jan 2026 07:56:45 GMT 
+ server: uvicorn 
+Responses
+Code	Description
+
+
+with 90k tokens

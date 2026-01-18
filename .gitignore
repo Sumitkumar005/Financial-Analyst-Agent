@@ -1,0 +1,68 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
+# Data Directories
+data/
+output/
+processed_data/
+uploads/
+*.md.backup
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+
+# API Keys and Secrets (extra safety)
+*_key.txt
+*_secret.txt
+*api_key*
+*API_KEY*
+*secret*
+*SECRET*
+
+# Temporary files
+*.tmp
+*.temp
+test_*.py
+*_test.py
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Coverage
+.coverage
+htmlcov/
+
+# Distribution
+dist/
+build/
+*.egg-info/
