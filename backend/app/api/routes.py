@@ -12,20 +12,28 @@ from fastapi import APIRouter, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
 from qdrant_client.models import PointStruct
 
-from app.config import (
+import sys
+from pathlib import Path
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent.parent.parent
+if str(project_root) not in sys.path:
+    sys.path.insert(0, str(project_root))
+
+from backend.app.config import (
     COLLECTION_NAME, PROCESSED_DATA_DIR, UPLOAD_DIR,
     MAX_TOKENS_PER_FILE, USE_SMART_RETRIEVAL, EMBEDDING_MODEL
 )
-from app.models import (
+from backend.app.models import (
     AnalyzeRequest, AnalyzeResponse, ProcessFileResponse
 )
-from app.services.qdrant_service import get_qdrant_client
-from app.services.embedding_service import get_embedding_model
-from app.services.llm_service import get_gemini_model, estimate_tokens
-from app.services.file_service import retrieve_relevant_sections, extract_relevant_sections
-from app.utils.html_extractor import extract_10k_html_from_txt
-from app.utils.markdown_converter import convert_html_to_markdown
-from app.utils.ticker_extractor import extract_ticker_from_content, extract_tickers_simple
+from backend.app.services.qdrant_service import get_qdrant_client
+from backend.app.services.embedding_service import get_embedding_model
+from backend.app.services.llm_service import get_gemini_model, estimate_tokens
+from backend.app.services.file_service import retrieve_relevant_sections, extract_relevant_sections
+from backend.app.utils.html_extractor import extract_10k_html_from_txt
+from backend.app.utils.markdown_converter import convert_html_to_markdown
+from backend.app.utils.ticker_extractor import extract_ticker_from_content, extract_tickers_simple
 
 router = APIRouter()
 

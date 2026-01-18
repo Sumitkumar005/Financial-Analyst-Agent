@@ -3,9 +3,9 @@ File retrieval and section extraction service
 """
 
 from typing import List, Dict, Any
-from app.services.qdrant_service import get_qdrant_client
-from app.services.embedding_service import get_embedding_model
-from app.config import SECTIONS_COLLECTION
+from backend.app.services.qdrant_service import get_qdrant_client
+from backend.app.services.embedding_service import get_embedding_model
+from backend.app.config import SECTIONS_COLLECTION
 
 
 def retrieve_relevant_sections(query: str, ticker: str, limit: int = 5) -> List[Dict[str, Any]]:

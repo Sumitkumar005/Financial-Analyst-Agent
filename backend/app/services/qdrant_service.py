@@ -3,7 +3,7 @@ Qdrant client service
 """
 
 from qdrant_client import QdrantClient
-from app.config import QDRANT_URL, QDRANT_API_KEY
+from backend.app.config import QDRANT_URL, QDRANT_API_KEY
 
 # Global client instance (lazy loading)
 _qdrant_client = None

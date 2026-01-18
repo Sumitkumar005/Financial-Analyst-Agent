@@ -10,7 +10,7 @@ except ImportError:
     print("[WARNING] Google Generative AI not installed. Gemini features will be disabled.")
     print("   Install with: pip install google-generativeai")
 
-from app.config import GEMINI_API_KEY, GEMINI_MODEL
+from backend.app.config import GEMINI_API_KEY, GEMINI_MODEL
 
 # Global model instance (lazy loading)
 _gemini_model = None

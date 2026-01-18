@@ -3,7 +3,7 @@ Embedding model service
 """
 
 from sentence_transformers import SentenceTransformer
-from app.config import EMBEDDING_MODEL
+from backend.app.config import EMBEDDING_MODEL
 
 # Global model instance (lazy loading)
 _embedding_model = None
