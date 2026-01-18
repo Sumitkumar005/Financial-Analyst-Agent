@@ -21,7 +21,7 @@ QDRANT_API_KEY=your_qdrant_api_key_here
 
 ### Step 2: Install Dependencies
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
 This will install:

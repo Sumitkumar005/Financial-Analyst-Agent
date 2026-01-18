@@ -49,7 +49,8 @@ Financial-Analyst-Agent/
 │
 ├── 📄 README.md                   # Main README
 ├── 📄 CONTRIBUTING.md             # Contributing guide
-├── 📄 requirements.txt            # Python dependencies
+├── 📁 backend/
+│   ├── 📄 requirements.txt        # Python dependencies
 ├── 📄 start_server.bat           # Windows server starter
 └── 📄 .env.example               # Environment template
 ```
