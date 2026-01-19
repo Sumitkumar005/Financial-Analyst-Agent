@@ -21,7 +21,17 @@ uploads/
 # Documentation (not pushed)
 docs/
 
-# Note: data/ and Demo_Video/ ARE pushed to repo
+# Large data files (>50MB) - excluded from repo
+data/ADP/10-K/0000008670-25-000037/full-submission.txt
+data/HON/10-K/0000773840-25-000010/full-submission.txt
+data/DHR/10-K/0000313616-25-000043/full-submission.txt
+data/IBM/10-K/0000051143-25-000015/full-submission.txt
+data/C/10-K/0000831001-25-000067/full-submission.txt
+data/JPM/10-K/0000019617-25-000270/full-submission.txt
+data/BAC/10-K/0000070858-25-000139/full-submission.txt
+data/WFC/10-K/0000072971-25-000066/full-submission.txt
+
+# Note: data/ and Demo_Video/ ARE pushed to repo (except large files above)
 
 # Note: processed_data/ and output/ are NOT ignored (needed for deployment)
 
