@@ -7,12 +7,44 @@ from backend.app.services.qdrant_service import get_qdrant_client
 from backend.app.services.embedding_service import get_embedding_model
 from backend.app.config import SECTIONS_COLLECTION
 
+# Try to use hybrid retriever if available
+try:
+    from backend.app.services.hybrid_retriever import get_hybrid_retriever
+    HYBRID_AVAILABLE = True
+except ImportError:
+    HYBRID_AVAILABLE = False
+    print("[INFO] Hybrid retriever not available, using dense-only search")
 
-def retrieve_relevant_sections(query: str, ticker: str, limit: int = 5) -> List[Dict[str, Any]]:
+
+def retrieve_relevant_sections(query: str, ticker: str, limit: int = 5, use_hybrid: bool = True) -> List[Dict[str, Any]]:
     """
     Priority 1: Smart Section Retrieval
     Retrieve only relevant sections from Qdrant instead of loading full file.
+    Uses hybrid search (dense + sparse/BM25) if available, otherwise falls back to dense-only.
     """
+    # Try hybrid retriever first (if available and enabled)
+    if use_hybrid and HYBRID_AVAILABLE:
+        try:
+            hybrid_retriever = get_hybrid_retriever()
+            results = hybrid_retriever.retrieve(query, ticker, limit, use_hybrid=True)
+            
+            # Convert to expected format
+            sections = []
+            for result in results:
+                sections.append({
+                    'text': result.get('text', ''),
+                    'section': result.get('section', 'Unknown'),
+                    'score': result.get('final_score', result.get('score', 0.0)),
+                    'metadata': result.get('metadata', {})
+                })
+            
+            print(f"[INFO] ✅ Hybrid retrieval: {len(sections)} relevant sections for {ticker} (dense + BM25)")
+            return sections
+        except Exception as e:
+            print(f"[WARNING] Hybrid retrieval failed: {e}. Falling back to dense-only search.")
+            # Fall through to dense-only search
+    
+    # Fallback: Dense-only search (original implementation)
     try:
         client = get_qdrant_client()
         embedding_model = get_embedding_model()
@@ -27,26 +59,34 @@ def retrieve_relevant_sections(query: str, ticker: str, limit: int = 5) -> List[
         
         if SECTIONS_COLLECTION not in collection_names:
             print(f"[WARNING] Sections collection '{SECTIONS_COLLECTION}' not found. Using full file.")
-            print(f"[INFO] Run 'python backend/scripts/chunk_markdown_files.py' to create the sections collection.")
+            print(f"[INFO] Run 'python -m backend.scripts.chunk_markdown_files' to create the sections collection.")
             return []
         
         # Generate query embedding
         query_embedding = embedding_model.encode(query, convert_to_numpy=True).tolist()
         
-        # Search for relevant sections
-        results = client.search(
+        # Import Filter for query
+        from qdrant_client.models import Filter, FieldCondition, MatchValue
+        
+        # Search for relevant sections using query_points
+        results = client.query_points(
             collection_name=SECTIONS_COLLECTION,
-            query_vector=query_embedding,
-            query_filter={
-                "must": [
-                    {"key": "ticker", "match": {"value": ticker}}
+            query=query_embedding,
+            query_filter=Filter(
+                must=[
+                    FieldCondition(
+                        key="ticker",
+                        match=MatchValue(value=ticker)
+                    )
                 ]
-            },
+            ),
             limit=limit
+            # Note: SearchParams(ef=...) not supported in this Qdrant version
+            # Qdrant uses optimized HNSW by default
         )
         
         sections = []
-        for result in results:
+        for result in results.points:
             sections.append({
                 'text': result.payload.get('text', ''),
                 'section': result.payload.get('section', 'Unknown'),
@@ -54,7 +94,7 @@ def retrieve_relevant_sections(query: str, ticker: str, limit: int = 5) -> List[
                 'metadata': result.payload
             })
         
-        print(f"[INFO] Retrieved {len(sections)} relevant sections for {ticker}")
+        print(f"[INFO] Retrieved {len(sections)} relevant sections for {ticker} (dense-only)")
         return sections
         
     except Exception as e:

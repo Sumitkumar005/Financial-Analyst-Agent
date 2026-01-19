@@ -15,35 +15,40 @@ try:
     from qdrant_client import QdrantClient
     from qdrant_client.models import Distance, VectorParams, PointStruct
 except ImportError:
-    print("❌ qdrant-client not installed. Run: pip install qdrant-client")
+    print("[ERROR] qdrant-client not installed. Run: pip install qdrant-client")
     exit(1)
 
 try:
     from sentence_transformers import SentenceTransformer
 except ImportError:
-    print("❌ sentence-transformers not installed. Run: pip install sentence-transformers")
+    print("[ERROR] sentence-transformers not installed. Run: pip install sentence-transformers")
     exit(1)
 
 # Configuration
+from pathlib import Path
+from dotenv import load_dotenv
+import sys
+
+# Load .env from project root
+project_root = Path(__file__).parent.parent.parent
+env_path = project_root / ".env"
+load_dotenv(dotenv_path=env_path)
+
+# Add project root to path
+sys.path.insert(0, str(project_root))
+
 QDRANT_URL = os.getenv("QDRANT_URL", "")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY", "")
 
 if not QDRANT_URL or not QDRANT_API_KEY:
     print("[ERROR] QDRANT_URL and QDRANT_API_KEY must be set in environment variables or .env file")
     exit(1)
+
 COLLECTION_NAME = "financial_sections"  # New collection for chunks
 EMBEDDING_DIM = 384
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
-# Paths relative to project root
-import sys
-from pathlib import Path
-
-# Add project root to path
-project_root = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(project_root))
-
 PROCESSED_DATA_DIR = project_root / "processed_data"
-METADATA_FILE = project_root / "conversion_metadata.json"
+# Note: We scan processed_data directly, no metadata file needed
 
 # Standard 10-K section patterns
 SECTION_PATTERNS = [
@@ -201,6 +206,8 @@ def initialize_collection(client: QdrantClient) -> bool:
             vectors_config=VectorParams(
                 size=EMBEDDING_DIM,
                 distance=Distance.COSINE
+                # Note: Qdrant uses HNSW by default for efficient vector search
+                # HNSW parameters are optimized automatically
             )
         )
         print(f"[SUCCESS] Collection '{COLLECTION_NAME}' created!")
@@ -210,19 +217,34 @@ def initialize_collection(client: QdrantClient) -> bool:
         return False
 
 
+def extract_ticker_from_filename(filename: str) -> str:
+    """Extract ticker from filename like AAPL_2024.md -> AAPL"""
+    # Remove extension and split by underscore
+    name = Path(filename).stem
+    parts = name.split('_')
+    if parts:
+        return parts[0].upper()
+    return "UNKNOWN"
+
+
 def main():
     """Main function to chunk and index all MD files."""
     print("="*80)
     print("PRIORITY 1: Smart Section Retrieval - Chunking & Indexing")
     print("="*80)
     
-    # Load metadata
-    if not Path(METADATA_FILE).exists():
-        print(f"[ERROR] {METADATA_FILE} not found!")
+    # Find all MD files in processed_data directory
+    if not PROCESSED_DATA_DIR.exists():
+        print(f"[ERROR] Directory not found: {PROCESSED_DATA_DIR}")
         return
     
-    with open(METADATA_FILE, 'r', encoding='utf-8') as f:
-        metadata_list = json.load(f)
+    md_files = list(PROCESSED_DATA_DIR.glob("*.md"))
+    
+    if not md_files:
+        print(f"[ERROR] No MD files found in {PROCESSED_DATA_DIR}")
+        return
+    
+    print(f"\n[INFO] Found {len(md_files)} MD files to process")
     
     # Initialize embedding model
     print(f"\n[INFO] Loading embedding model: {EMBEDDING_MODEL}...")
@@ -236,61 +258,73 @@ def main():
     if not initialize_collection(client):
         return
     
-    # Process each company
+    # Process each MD file
     all_points = []
     total_chunks = 0
+    processed_count = 0
     
-    for company_meta in metadata_list:
-        ticker = company_meta['ticker']
-        md_file = Path(company_meta['markdown_file'])
+    for md_file in md_files:
+        # Extract ticker from filename
+        ticker = extract_ticker_from_filename(md_file.name)
         
-        if not md_file.exists():
-            print(f"[WARNING] File not found: {md_file}")
-            continue
+        # Extract year from filename if available (e.g., AAPL_2024.md)
+        year = "2024"  # Default
+        name_parts = md_file.stem.split('_')
+        for part in name_parts:
+            if part.isdigit() and len(part) == 4:
+                year = part
+                break
         
-        print(f"\n[PROCESSING] {ticker}...")
+        print(f"\n[PROCESSING] {ticker} ({year}) - {md_file.name}...")
         
-        # Read and clean file
-        with open(md_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        # Clean XBRL noise (Priority 2)
-        content = clean_xbrl_noise(content)
-        
-        # Chunk by sections
-        chunks = chunk_by_sections(content, ticker)
-        
-        print(f"  → Found {len(chunks)} sections")
-        
-        # Create embeddings and prepare points
-        for chunk in chunks:
-            # Generate embedding
-            embedding = embedding_model.encode(chunk['text'], convert_to_numpy=True).tolist()
+        try:
+            # Read and clean file
+            with open(md_file, 'r', encoding='utf-8') as f:
+                content = f.read()
             
-            # Create point
-            point = PointStruct(
-                id=str(uuid.uuid4()),
-                vector=embedding,
-                payload={
-                    'ticker': ticker,
-                    'section': chunk['section'],
-                    'text': chunk['text'],
-                    'start_line': chunk['start_line'],
-                    'end_line': chunk['end_line'],
-                    'year': company_meta.get('year', '2024'),
-                    'file_path': str(md_file),
-                    'chunk_length': len(chunk['text']),
-                    'tables_count': chunk['text'].count('| --- |')  # Rough estimate
-                }
-            )
-            all_points.append(point)
-            total_chunks += 1
+            # Clean XBRL noise
+            content = clean_xbrl_noise(content)
+            
+            # Chunk by sections
+            chunks = chunk_by_sections(content, ticker)
+            
+            print(f"  -> Found {len(chunks)} sections")
+            
+            # Create embeddings and prepare points
+            for chunk in chunks:
+                # Generate embedding
+                embedding = embedding_model.encode(chunk['text'], convert_to_numpy=True).tolist()
+                
+                # Create point
+                point = PointStruct(
+                    id=str(uuid.uuid4()),
+                    vector=embedding,
+                    payload={
+                        'ticker': ticker,
+                        'section': chunk['section'],
+                        'text': chunk['text'],
+                        'start_line': chunk['start_line'],
+                        'end_line': chunk['end_line'],
+                        'year': year,
+                        'file_path': str(md_file),
+                        'chunk_length': len(chunk['text']),
+                        'tables_count': chunk['text'].count('| --- |')  # Rough estimate
+                    }
+                )
+                all_points.append(point)
+                total_chunks += 1
+            
+            processed_count += 1
+            
+            # Batch upload every 100 chunks
+            if len(all_points) >= 100:
+                client.upsert(collection_name=COLLECTION_NAME, points=all_points)
+                print(f"  -> Uploaded {len(all_points)} chunks to Qdrant")
+                all_points = []
         
-        # Batch upload every 100 chunks
-        if len(all_points) >= 100:
-            client.upsert(collection_name=COLLECTION_NAME, points=all_points)
-            print(f"  → Uploaded {len(all_points)} chunks to Qdrant")
-            all_points = []
+        except Exception as e:
+            print(f"  [ERROR] Failed to process {md_file.name}: {e}")
+            continue
     
     # Upload remaining points
     if all_points:
@@ -298,7 +332,7 @@ def main():
         print(f"\n[SUCCESS] Uploaded final {len(all_points)} chunks")
     
     print(f"\n{'='*80}")
-    print(f"[COMPLETE] Indexed {total_chunks} chunks from {len(metadata_list)} companies")
+    print(f"[COMPLETE] Indexed {total_chunks} chunks from {processed_count} companies")
     print(f"[INFO] Collection: {COLLECTION_NAME}")
     print(f"[INFO] Use this collection for smart section retrieval!")
     print(f"{'='*80}")

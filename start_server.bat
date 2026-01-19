@@ -6,6 +6,6 @@ echo - Gemini API Key: Configured
 echo - Model: gemini-2.5-flash
 echo - Qdrant: Connected to Cloud
 echo.
-call venv\Scripts\activate.bat
+call backend\venv\Scripts\activate.bat
 python -m backend.app.main
 pause

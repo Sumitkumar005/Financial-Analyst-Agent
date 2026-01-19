@@ -15,11 +15,15 @@ ENV/
 .venv
 
 # Data Directories
-data/
-output/
-processed_data/
 uploads/
 *.md.backup
+
+# Documentation (not pushed)
+docs/
+
+# Note: data/ and Demo_Video/ ARE pushed to repo
+
+# Note: processed_data/ and output/ are NOT ignored (needed for deployment)
 
 # IDE
 .vscode/

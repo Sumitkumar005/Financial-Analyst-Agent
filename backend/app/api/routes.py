@@ -371,15 +371,15 @@ async def search_companies(query: str, limit: int = 10):
         # Generate query embedding
         query_embedding = embedding_model.encode(query, convert_to_numpy=True).tolist()
         
-        # Search
-        results = client.search(
+        # Search using query_points (newer Qdrant API)
+        results = client.query_points(
             collection_name=COLLECTION_NAME,
-            query_vector=query_embedding,
+            query=query_embedding,
             limit=limit
         )
         
         companies = []
-        for result in results:
+        for result in results.points:
             companies.append({
                 "ticker": result.payload.get("ticker", ""),
                 "year": result.payload.get("year", "2024"),
@@ -532,31 +532,44 @@ Total content size: {sum(c['content_length'] for c in companies_data)} character
                 ticker = company_data['ticker']
                 file_path = company_data['file_path']
                 
-                # Priority 1: Try smart section retrieval first
-                if USE_SMART_RETRIEVAL:
-                    sections = retrieve_relevant_sections(request.query, ticker, limit=5)
+                # Priority 1: ALWAYS try smart section retrieval first (Proper RAG)
+                sections = retrieve_relevant_sections(request.query, ticker, limit=5)  # Reduced from 10 to 5
+                
+                if sections and len(sections) > 0:
+                    # Use retrieved sections (PROPER RAG) with token budget
+                    section_texts = []
+                    total_retrieved_tokens = 0
+                    MAX_TOKENS_BUDGET = 50000  # Max 20K tokens from RAG
                     
-                    if sections:
-                        # Use retrieved sections
-                        section_texts = []
-                        for section in sections:
-                            section_texts.append(f"### {section['section']}\n{section['text']}")
+                    for section in sections:
+                        section_name = section.get('section', 'Unknown')
+                        section_text = section.get('text', '')
+                        score = section.get('score', 0)
+                        section_tokens = estimate_tokens(section_text)
                         
-                        content = "\n\n".join(section_texts)
-                        tokens = estimate_tokens(content)
-                        total_tokens += tokens
-                        print(f"[INFO] Using smart retrieval for {ticker}: {tokens} tokens from {len(sections)} sections")
-                    else:
-                        # Fallback to full file
-                        print(f"[INFO] Smart retrieval unavailable for {ticker}, using full file")
-                        content = Path(file_path).read_text(encoding='utf-8')
-                        tokens = estimate_tokens(content)
-                        total_tokens += tokens
+                        # Stop if adding this section would exceed budget
+                        if total_retrieved_tokens + section_tokens > MAX_TOKENS_BUDGET:
+                            print(f"[INFO] Token budget reached ({MAX_TOKENS_BUDGET:,} tokens), stopping retrieval")
+                            break
+                        
+                        section_texts.append(f"### {section_name} (Relevance: {score:.3f})\n{section_text}")
+                        total_retrieved_tokens += section_tokens
+                    
+                    content = "\n\n".join(section_texts)
+                    tokens = estimate_tokens(content)
+                    total_tokens += tokens
+                    print(f"[INFO] ✅ Using RAG retrieval for {ticker}: {tokens:,} tokens from {len(section_texts)} relevant sections")
+                    full_file_tokens = estimate_tokens(Path(file_path).read_text(encoding='utf-8'))
+                    savings = ((full_file_tokens - tokens) / full_file_tokens) * 100
+                    print(f"[INFO] 📊 Token efficiency: Retrieved {tokens:,} tokens instead of full file (~{full_file_tokens:,} tokens) - {savings:.1f}% reduction")
                 else:
-                    # Load full file (original behavior)
+                    # Fallback to full file ONLY if no chunks found (should be rare)
+                    print(f"[WARNING] ⚠️  No relevant sections found for {ticker}, falling back to full file")
+                    print(f"[WARNING] 💡 Run 'python -m backend.scripts.chunk_markdown_files' to enable proper RAG")
                     content = Path(file_path).read_text(encoding='utf-8')
                     tokens = estimate_tokens(content)
                     total_tokens += tokens
+                    print(f"[INFO] Using full file for {ticker}: {tokens:,} tokens")
                 
                 # If total is too large, use smart extraction (fallback)
                 if total_tokens > MAX_TOKENS_PER_FILE * len(companies_data):
