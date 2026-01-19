@@ -10,9 +10,11 @@ An intelligent financial document analysis platform that processes SEC 10-K fili
 
 <div align="center">
 
-[![Financial Analyst Agent Demo](https://img.youtube.com/vi/B7q4Bxew5sw/maxresdefault.jpg)](https://www.youtube.com/watch?v=B7q4Bxew5sw)
+### [▶️ **Watch Full Demo Video on YouTube**](https://www.youtube.com/watch?v=B7q4Bxew5sw)
 
-**[▶️ Watch Full Demo Video](https://www.youtube.com/watch?v=B7q4Bxew5sw)**
+<a href="https://www.youtube.com/watch?v=B7q4Bxew5sw">
+  <img src="https://img.youtube.com/vi/B7q4Bxew5sw/0.jpg" alt="Financial Analyst Agent Demo" width="600"/>
+</a>
 
 *See the system analyze Apple's revenue tables, compare company financials, and extract insights in real-time*
 
